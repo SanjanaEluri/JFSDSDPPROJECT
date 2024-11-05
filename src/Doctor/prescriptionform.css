@@ -1,0 +1,73 @@
+/* Prescription Form Container */
+.prescription-form {
+    background-color: #f8f9fa; /* light grey background */
+    padding: 130px;
+    margin: 40px auto;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+/* Form Title */
+.prescription-form h1 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #003366; /* Dark blue matching sidebar */
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Form Fields */
+.prescription-form label {
+    font-weight: bold;
+    color: #333;
+    display: block;
+    margin-bottom: 5px;
+    font-size: 16px;
+}
+
+.prescription-form input[type="text"],
+.prescription-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.prescription-form textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* Submit Button */
+.prescription-form button {
+    width: 100%;
+    padding: 12px;
+    background-color: #003366; /* Dark blue matching sidebar */
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center;
+}
+
+.prescription-form button:hover {
+    background-color: #00509e; /* Lighter shade of blue */
+}
+
+/* Additional styling for responsiveness */
+@media (max-width: 768px) {
+    .prescription-form {
+        width: 90%;
+        padding: 15px;
+    }
+}

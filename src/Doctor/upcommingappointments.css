@@ -1,0 +1,42 @@
+/* UpcomingAppointments.css */
+
+.upcoming-appointments {
+    margin-left: 220px;
+    padding: 20px;
+  }
+  
+  .appointment-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .appointment-table th, .appointment-table td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+  }
+  
+  .appointment-table th {
+    background-color: #002f6c;
+    color: white;
+  }
+  
+  .appointment-table td button {
+    margin-right: 10px;
+    padding: 6px 12px;
+    cursor: pointer;
+  }
+  
+  .appointment-table td button:first-child {
+    background-color: #28a745;
+    color: white;
+    border: none;
+  }
+  
+  .appointment-table td button:last-child {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+  }
+  
