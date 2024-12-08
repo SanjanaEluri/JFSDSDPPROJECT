@@ -5,11 +5,13 @@ import Services from './Services'
 import Login from './Login'
 import Signup from './Signup'
 import '../style.css'
-import Doctorlogin from '../Doctor/Doctorlogin'
-import Adminlogin from '../Admin/Adminlogin'
+import DoctorLogin from '../Doctor/DoctorLogin'
+import Adminlogin from '../Admin/AdminLogin'
 import DoctorSignUp from '../Doctor/DoctorSignup'
 
+
 export default function MainNavBar({onAdminLogin,onPatientLogin,onDoctorLogin}) {
+  
   return (
     <div>
       <div className='header-container'>
@@ -26,14 +28,16 @@ export default function MainNavBar({onAdminLogin,onPatientLogin,onDoctorLogin}) 
       </header>
       </div>
       <Routes>
-        <Route path='/' Component={Home}/>
-        <Route path='/home' Component={Home}/>
-        <Route path='/services' Component={Services}/>
-        <Route path='/login' element={<Login onPatientLogin={onPatientLogin} />}/>
-        <Route path='/signup' Component={Signup}/>
-        <Route path='/doctorlogin' element={<Doctorlogin onDoctorLogin={onDoctorLogin}/>}/>
-        <Route path='/adminlogin' element={<Adminlogin onAdminLogin={onAdminLogin}/>}/>
-        <Route path='/doctorsignup' Component={DoctorSignUp}/>
+        <Route path='/' Component={Home} exact/>
+        <Route path='/home' Component={Home} exact/>
+        <Route path='/services' Component={Services} exact/>
+        <Route path='/login' element={<Login onPatientLogin={onPatientLogin} />} exact/>
+        <Route path='/signup' Component={Signup} exact/>
+        <Route path='/doctorlogin' element={<DoctorLogin onDoctorLogin={onDoctorLogin}/>}exact/>
+        <Route path='/adminlogin' element={<Adminlogin onAdminLogin={onAdminLogin}/>} exact/>
+        <Route path='/doctorsignup' Component={DoctorSignUp} exact/>
+        <Route path="*" element={<Login onPatientLogin={onPatientLogin} />} exact />
+
         
       </Routes>
     </div>

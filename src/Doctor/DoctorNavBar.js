@@ -1,26 +1,30 @@
 import React from 'react';
-import { Routes, Route, Link,useNavigate } from 'react-router-dom';
+import { Routes, Route, Link, useNavigate } from 'react-router-dom';
 import DoctorHome from './DoctorHome';
 import DoctorProfile from './DoctorProfile';
 import ViewAppointments from './ViewAppointments';
-
 import Home from '../Main/Home';
-
 import '../style.css';
 import UpcomingAppointments from './UpcommingAppointments';
 import PrescriptionForm from './PrescriptionForm';
 import ViewPrescriptions from './ViewPrescriptions';
 import ViewPatients from './ViewPatients';
+import EmailForm from './EmailForm';
+import ApproveAppointments from './ApproveAppointments';
 
 export default function DoctorNavBar() {
-  const navigate=useNavigate()
+  const navigate = useNavigate();
+  
+  // Define docId at the top of the function
+  const docId = localStorage.getItem('doctor') ? JSON.parse(localStorage.getItem('doctor')).id : null;
+
   const handleLogout = () => {
     localStorage.removeItem('isDoctorLoggedIn');
-    localStorage.removeItem('Doctor');
-
+    localStorage.removeItem('doctor');
     navigate('/home');
-    window.location.reload()
+    window.location.reload();
   };
+
   return (
     <div>
       {/* Header Section */}
@@ -32,7 +36,7 @@ export default function DoctorNavBar() {
           </div>
           <div className='nav-bar'>
             <Link to='/profile'>Profile</Link>
-            <Link to='/home'>Logout</Link>
+           
           </div>
         </header>
       </div>
@@ -40,13 +44,12 @@ export default function DoctorNavBar() {
       {/* Sidebar Section */}
       <div className='sidebar'>
         <Link to='/doctorhome'>Home</Link>
+        <Link to='/approveappointments'>ApproveAppointments</Link>
+        <Link to='/upcomingappointments'>Scheduled Appointments</Link>
         <Link to='/viewappointment'>View Appointments</Link>
-        
-        
-        <Link to='/upcomingappointments'>Upcoming Appointments</Link>
-        <Link to='/addprescription'>Add Prescription</Link>
-        <Link to='/viewprescriptions'>View Prescriptions</Link>
+        {/* <Link to='/viewprescriptions'>View Prescriptions</Link> */}
         <Link to='/viewpatients'>View Patients</Link>
+        
         <Link><button className='logoutbutton' onClick={handleLogout}>Logout</button></Link>
       </div>
 
@@ -55,13 +58,14 @@ export default function DoctorNavBar() {
         <Route path='/' element={<DoctorHome />} />
         <Route path='/doctorhome' element={<DoctorHome />} />
         <Route path='/profile' element={<DoctorProfile />} />
-        <Route path='/viewappointment' element={<ViewAppointments />} />
        
-       
-        <Route path='/upcomingappointments' element={<UpcomingAppointments/>} />
-        <Route path='/addprescription' element={<PrescriptionForm/>} />
-        <Route path='/viewprescriptions' element={<ViewPrescriptions/>} />
+        <Route path='/upcomingappointments' element={<UpcomingAppointments />} />
+        <Route path='/viewappointment' element={docId ? <ViewAppointments docId={docId} /> : <p>Doctor ID not found</p>} />
+        <Route path='/addprescription' element={<PrescriptionForm />} />
+        <Route path='/viewprescriptions' element={<ViewPrescriptions />} />
         <Route path='/viewpatients' element={<ViewPatients/>} />
+        <Route path='/emailform' element={<EmailForm/>}/>
+        <Route path='/approveappointments' element={<ApproveAppointments/>}/>
         <Route path='/home' element={<Home />} />
       </Routes>
     </div>

@@ -1,0 +1,39 @@
+.view-doctors-container {
+    margin: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #f7f9fc;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .error-message {
+    color: red;
+    font-size: 1.2em;
+  }
+  
+  .doctors-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .doctors-table th, .doctors-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+  }
+  
+  .doctors-table th {
+    background-color: #007BFF;
+    color: white;
+    font-weight: bold;
+  }
+  
+  .doctors-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  .doctors-table tr:hover {
+    background-color: #f1f1f1;
+  }
+  

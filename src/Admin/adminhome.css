@@ -1,0 +1,77 @@
+.notification {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 10px 20px; /* Increase horizontal padding for a better look */
+    border-radius: 5px;
+    font-size: 13px;
+    position: relative;
+    z-index: 1000; /* Ensure it's on top */
+    width: auto; /* Let it adjust based on content */
+    max-width: 400px; /* Limit the maximum width */
+    margin: 70px auto; /* Center it horizontally and add margin at the top */
+    text-align: center; /* Center the text inside the notification */
+  }
+  .admin-home-container {
+    padding: 20px;
+  }
+  
+  .notification {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 13px;
+    position: relative;
+    z-index: 1000;
+    width: auto;
+    max-width: 400px;
+    margin: 20px auto;
+    text-align: center;
+  }
+  
+  .pie-chart-container {
+    width: 30%; /* Adjusted width for a medium-sized chart */
+    margin: 20px 0;
+    float: left; /* Aligns the pie chart to the left */
+    padding-left: 190px; /* Optional: Add left padding if needed */
+  }
+  
+  .doctor-summary {
+    margin-top: 20px;
+    font-size: 16px;
+  }
+  
+  
+  .image-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+  }
+ 
+  .viewpatients-image {
+    width: 200px; /* Set the desired width */
+    height: auto; /* Maintain aspect ratio */
+    cursor: pointer; /* Show pointer cursor on hover */
+    border-radius: 10px; /* Optional: add rounded corners */
+    transition: transform 0.2s ease; /* Optional: add smooth hover effect */
+  }
+  
+  .viewpatients-image:hover {
+    transform: scale(1.1); /* Slight zoom effect on hover */
+  }
+  
+/* Stylish heading for View Patients */
+.image-container p {
+    font-size: 24px;
+    font-weight: bold;
+    color: #5255e5; /* A nice green color */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 0; /* Remove default margin */
+    padding: 5px;
+    transition: color 0.3s ease; /* Smooth color transition */
+  }
+  
+  .image-container p:hover {
+    color: #388E3C; /* Change color on hover */
+  }

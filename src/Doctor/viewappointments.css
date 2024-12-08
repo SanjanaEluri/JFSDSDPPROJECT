@@ -1,56 +1,62 @@
+/* General content area styling to prevent overlap with sidebar or navbar */
+.content-area {
+  margin-left: 220px; /* Adjust this based on your sidebar width */
+  padding: 20px;
+  min-width: 800px; /* Ensure a minimum width for the content */
+}
+
+/* Styling for the view appointments section */
 .view-appointments {
-    padding: 20px;
-    font-family: Arial, sans-serif;
-    margin-top: 80px; /* Adjust based on your navbar height */
+  margin-top: 100px; /* Adjust based on navbar height */
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+/* Header styling */
+h1 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Table styling */
+.appointments-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.appointments-table th,
+.appointments-table td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: left;
+}
+
+.appointments-table th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+.appointments-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.appointments-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Responsive design adjustments */
+@media (max-width: 768px) {
+  .content-area {
+    margin-left: 0;
+    padding: 10px;
+    min-width: 100%; /* Full width for smaller screens */
   }
-  
-  h1 {
-    margin-bottom: 20px;
-    text-align: center;
-  }
-  
-  .add-button {
-    padding: 10px 20px;
-    color: #fff;
-    background-color: #28a745;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    margin-bottom: 20px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    transition: background-color 0.3s ease;
-  }
-  
-  .add-button:hover {
-    background-color: #218838;
-  }
-  
-  .appointments-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-  }
-  
+
   .appointments-table th,
   .appointments-table td {
-    border: 1px solid #ddd;
-    padding: 12px;
-    text-align: left;
+    font-size: 12px;
+    padding: 8px;
   }
-  
-  .appointments-table th {
-    background-color: #f4f4f4;
-    font-weight: bold;
-  }
-  
-  .appointments-table tr:nth-child(even) {
-    background-color: #f9f9f9;
-  }
-  
-  .appointments-table tr:hover {
-    background-color: #f1f1f1;
-  }
-  
+}

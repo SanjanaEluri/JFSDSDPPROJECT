@@ -14,7 +14,7 @@ export default function DoctorLogin({ onDoctorLogin }) {
   const [error, setError] = useState("");
 
   const location = useLocation();
-  const activeLogin = location.pathname; // use pathname to detect the active page
+  const activeLogin = location.pathname;
 
   const handleChange = (e) => {
     setData({ ...data, [e.target.id]: e.target.value });
@@ -22,45 +22,50 @@ export default function DoctorLogin({ onDoctorLogin }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try 
-    {
-      const response = await axios.post('http://localhost:2220/doctorlogin', data , {
+    try {
+      const response = await axios.post('https://jfsdsdpbackend.up.railway.app/doclogin', data, {
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'// to convert json data into form data
-        }
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
       });
-      console.log(response.data)
-      if (response.data) 
-      {
-        
-        onDoctorLogin();
 
-        localStorage.setItem('doctor', JSON.stringify(response.data));
+      if (response.data) {
+        const status = response.data.status;
 
-        navigate("/doctorhome");
-      } 
-      else 
-      {
-        setMessage("Incorrect mail or password")
-        setError("")
+        if (status === 'accepted') {
+          onDoctorLogin();
+          localStorage.setItem('doctor', JSON.stringify(response.data));
+          navigate('/doctorhome');
+        } else if (status === 'Registered') {
+          setMessage('Your registration is under verification by admin.');
+          setError('');
+        } else if (status === 'Rejected') {
+          setMessage('Your application was rejected by the admin.');
+          setError('');
+        } else {
+          setMessage('Unexpected status returned. Please contact support.');
+          setError('');
+        }
+      } else {
+        setMessage('');
+        setError('Incorrect email or password.');
       }
-    } 
-    catch (error) 
-    {
-      setMessage("")
-      setError(error.message)
+    } catch (err) {
+      setMessage('');
+      setError('An error occurred. Please try again.');
+      console.error('Error during login:', err);
     }
-    //console.log(data);
   };
 
   return (
     <div className="login-page">
       <section className="login-section">
         <div className="login-content">
-          {
-            message ? <h4 align="center" style={{ color: "red" }}>{message}</h4> : <h4 align="center" style={{ color: "red" }}>{error}</h4>
-          }
-          
+          {/* Displaying the message or error */}
+          {message && <h4 align="center" style={{ color: "red" }}>{message}</h4>}
+          {error && <h4 align="center" style={{ color: "red" }}>{error}</h4>}
+
+          {/* Toggle buttons for different login types */}
           <div className="toggle-buttons">
             <Link to="/login" className={`toggle-button patient-login ${activeLogin === '/login' ? 'active' : ''}`}>Patient</Link>
             <Link to="/doctorlogin" className={`toggle-button doctor-login ${activeLogin === '/doctorlogin' ? 'active' : ''}`}>Doctor</Link>
@@ -68,18 +73,29 @@ export default function DoctorLogin({ onDoctorLogin }) {
             <div className="toggle-selector"></div>
           </div>
 
+          {/* Login form */}
           <form onSubmit={handleSubmit} className="login-form">
             <div className="form-group">
               <label>Email:</label>
-              <input type="email" id='email' onChange={handleChange} required />
+              <input
+                type="email"
+                id="email"
+                onChange={handleChange}
+                required
+                value={data.email}
+              />
             </div>
             <div className="form-group">
               <label>Password:</label>
-              <input type="password" id='password' onChange={handleChange} required />
+              <input
+                type="password"
+                id="password"
+                onChange={handleChange}
+                required
+                value={data.password}
+              />
             </div>
-            <button type="submit" className="submit-button">
-              Login
-            </button>
+            <button type="submit" className="submit-button">Login</button>
             <p className="signup-prompt">Don't have an account?</p>
             <Link to="/doctorsignup" className="signup-button">Signup</Link>
           </form>

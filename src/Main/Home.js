@@ -2,33 +2,20 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import '../style.css';
 
+
 export default function Home() {
   return (
     <div className="home-container">
       {/* Hero Section */}
       <section className="hero-section">
         <div className="hero-content">
-          <h1>Welcome to Soul Medic Hospital</h1>
+        <h1 style={{ color: "white" }}>Welcome to Soul Medic Hospital</h1>
+
           <p>Committed to Compassionate, Quality Care</p>
           <Link to="/login" className="cta-button">Book Appointment</Link>
         </div>
       </section>
-     {/* <section className="features">
-          <div className="feature">
-            <img className="icon" src= "images/icon1.png"alt="icon" />
-            <h3>ADVANCED TECHNOLOGY</h3>
-          </div>
-          <div className="feature">
-            <img className="icon" src= "images/icon1.png" alt="icon" />
-            <h3>HEALTHCARE SOLUTIONS</h3>
-          </div>
-          <div className="feature">
-            <img className="icon" src= "images/icon1.png" alt="icon" />
-            <h3>24/7 AVAILABILITY</h3>
-          </div>
-        </section>*/}
-
-      {/* Contact Details Section */}
+     
       <section className="contact-section">
         <h2>Contact Us</h2>
         <p>For appointments, inquiries, or assistance, please reach out:</p>

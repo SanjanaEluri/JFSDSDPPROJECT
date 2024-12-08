@@ -1,47 +1,54 @@
-.view-prescriptions {
-  padding: 20px;
-  font-family: Arial, sans-serif;
-  margin-top: 80px; /* Adjust this value to push content below the navbar */
+.view-prescriptions-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100vh;
+  padding-top: 80px; /* Adjust as needed */
 }
 
-h1 {
-  margin-bottom: 20px;
-  font-size: 24px;
-  text-align: center; /* Center the heading */
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.add-button {
-  padding: 10px 20px;
-  color: #fff;
-  background-color: #28a745;
+label {
+  margin-bottom: 5px;
+}
+
+input {
+  margin-bottom: 10px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 16px;
-  margin-bottom: 20px;
-  transition: background-color 0.3s ease;
-  display: block; /* Make button a block element to center */
-  margin-left: auto; /* Center horizontally */
-  margin-right: auto; /* Center horizontally */
 }
 
-.add-button:hover {
-  background-color: #218838;
+button:hover {
+  background-color: #0056b3;
 }
 
-.prescription-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.prescription-table th,
-.prescription-table td {
-  border: 5px solid #ddd;
-  padding: 20px;
-  text-align: left;
-}
-
-.prescription-table th {
-  background-color: #f4f4f4;
+.error-message {
+  color: rgb(38, 0, 255);
+  margin-top: 10px;
   font-weight: bold;
+}
+
+.prescription-message {
+  color: blue; /* Prescription details in blue */
+  margin-top: 10px;
+}
+
+.data-message {
+  color: rgb(255, 111, 0); /* "No prescriptions found" message in blue */
+  margin-top: 10px;
 }

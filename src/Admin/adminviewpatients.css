@@ -1,0 +1,64 @@
+/* Container for the ViewPatients component */
+.view-patients-container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .view-patients-container h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 2rem;
+  }
+  
+  /* Styling for the patient table */
+  .patients-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .patients-table th, .patients-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .patients-table th {
+    background-color: #4CAF50; /* Green color for header */
+    color: white;
+    font-weight: bold;
+  }
+  
+  .patients-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .patients-table tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  /* Loading message styling */
+  .view-patients-container p {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #555;
+  }
+  
+  /* Optional: Styling for patient table rows when empty */
+  .patients-table td {
+    text-align: center;
+  }
+  
+  /* Optional: Styling for 'No patients' message */
+  .no-patients-message {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #ff6f61;
+    margin-top: 20px;
+  }
+  

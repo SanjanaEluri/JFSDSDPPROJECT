@@ -14,7 +14,7 @@ export default function Login({onPatientLogin}) {
   const [error,setError]=useState("")
 
   const location = useLocation();
-  const activeLogin = location.pathname; // use pathname to detect the active page
+  const activeLogin = location.pathname;  
 
   const handleChange = (e) => {
     setData({ ...data, [e.target.id]: e.target.value });
@@ -22,36 +22,34 @@ export default function Login({onPatientLogin}) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try 
-    {
-      const response = await axios.post('http://localhost:2220/patientlogin', data , {
+    try {
+      const response = await axios.post('https://jfsdsdpbackend.up.railway.app/patientlogin', data, {
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'// to convert json data into form data
-        }
+          'Content-Type': 'application/x-www-form-urlencoded', // to convert json data into form data
+        },
       });
-      console.log(response.data)
-      if (response.data) 
-      {
+  
+      console.log(response.data);
+  
+      if (response.data !== "") {
         onPatientLogin();
-
+        console.log(response.data);
+        
+        // Store patient data in localStorage
         localStorage.setItem('patient', JSON.stringify(response.data));
-
+        
         navigate("/patienthome");
-      } 
-      else 
-      {
-        setMessage("Incorrect mail or password")
-        setError("")
+      } else {
+        // Display the error message if credentials are incorrect
+        setMessage("Incorrect email or password");
+        setError("");
       }
-    } 
-    catch (error) 
-    {
-      setMessage("")
-      setError(error.message)
+    } catch (error) {
+      setMessage("");
+      setError(error.message);
     }
-    //console.log(data);
   };
-
+  
   return (
     <div className="login-page">
       

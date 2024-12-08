@@ -647,3 +647,50 @@
       width: 100%;
   }
 }
+.signup-section {
+  padding-top: 80px; /* Ensure it's below the header */
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.signup-wrapper {
+  max-height: 80vh; /* Maximum height as 80% of the viewport */
+  overflow-y: auto; /* Enables vertical scrolling */
+  width: 100%;
+  max-width: 600px; /* Set a max width for the form */
+  background-color: #ffffff; /* Background color for contrast */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Optional shadow for better visual */
+}
+
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Adds space between form fields */
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-field label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+button {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #004080;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #003366;
+}

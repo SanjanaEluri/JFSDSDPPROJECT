@@ -1,42 +1,93 @@
-/* UpcomingAppointments.css */
-
+/* Main container styling */
 .upcoming-appointments {
-    margin-left: 220px;
-    padding: 20px;
-  }
-  
-  .appointment-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-  }
-  
-  .appointment-table th, .appointment-table td {
-    padding: 12px;
-    border: 1px solid #ddd;
-    text-align: left;
-  }
-  
-  .appointment-table th {
-    background-color: #002f6c;
-    color: white;
-  }
-  
-  .appointment-table td button {
-    margin-right: 10px;
-    padding: 6px 12px;
-    cursor: pointer;
-  }
-  
-  .appointment-table td button:first-child {
-    background-color: #28a745;
-    color: white;
-    border: none;
-  }
-  
-  .appointment-table td button:last-child {
-    background-color: #dc3545;
-    color: white;
-    border: none;
-  }
-  
+  max-width: 900px; /* Increased width for better table visibility */
+  margin: 50px auto;
+  padding: 30px;
+  background-color: #ffffff; /* Clean white background */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15); /* Subtle shadow for depth */
+  border-radius: 10px;
+}
+
+/* Header styling */
+.upcoming-appointments h1 {
+  font-size: 26px;
+  color: #2c3e50; /* Dark slate for text */
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+/* Table container for scrolling */
+.table-container {
+  overflow-x: auto;
+}
+
+/* Table styling */
+.appointment-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #34495e; /* Darker text color for better readability */
+}
+
+/* Header row styling */
+.appointment-table thead tr {
+  background-color: #6c5ce7; /* Soft purple */
+  color: #ffffff; /* White text for contrast */
+  text-transform: uppercase; /* Styling for headers */
+}
+
+/* Table cells */
+.appointment-table th,
+.appointment-table td {
+  padding: 14px 12px;
+  text-align: left;
+  border-bottom: 1px solid #ecf0f1; /* Light gray borders */
+}
+
+.appointment-table th {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.appointment-table td {
+  font-size: 14px;
+}
+
+/* Hover effect for rows */
+.appointment-table tbody tr:hover {
+  background-color: #dfe6e9; /* Light gray for hover */
+  transition: background-color 0.3s ease-in-out;
+}
+
+/* Last row border removal */
+.appointment-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Buttons in the table */
+.appointment-table button {
+  padding: 6px 12px;
+  margin-right: 5px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.appointment-table button:hover {
+  opacity: 0.9;
+}
+
+/* Accept button */
+.appointment-table button.accept {
+  background-color: #00b894; /* Teal green */
+  color: #ffffff;
+}
+
+/* Reject button */
+.appointment-table button.reject {
+  background-color: #d63031; /* Red with a slight pink hue */
+  color: #ffffff;
+}

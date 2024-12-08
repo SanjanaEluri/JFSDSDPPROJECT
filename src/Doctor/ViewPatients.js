@@ -1,52 +1,104 @@
-import React, { useState } from 'react';
-import './viewpatients.css'; // Ensure you create a CSS file for styles
-
-// Sample patient data
-const patientsData = [
-  { id: 1, name: 'Jane Smith', age: 28, condition: 'Follow-up', email: 'jane@example.com' },
-  { id: 2, name: 'Bob Johnson', age: 34, condition: 'New Patient', email: 'bob@example.com' },
-  { id: 3, name: 'Alice Brown', age: 30, condition: 'Routine Check', email: 'alice@example.com' },
-  // Add more patient data as needed
-];
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 export default function ViewPatients() {
-  const [patientId, setPatientId] = useState('');
-  const [patientDetails, setPatientDetails] = useState(null);
+  const [patients, setPatients] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [patientData, setPatientData] = useState(null);
 
-  const handleInputChange = (e) => {
-    setPatientId(e.target.value);
-  };
+  // Fetch doctor data from localStorage
+  useEffect(() => {
+    const storedPatientData = localStorage.getItem('doctor');
+    if (storedPatientData) {
+      setPatientData(JSON.parse(storedPatientData));
+    }
+  }, []);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const patient = patientsData.find((p) => p.id === parseInt(patientId));
-    setPatientDetails(patient || null); // Set patient details or null if not found
-  };
+  // Fetch patients only when patientData is available
+  useEffect(() => {
+    if (!patientData || !patientData.id) return; // Wait for patientData to be set
+
+    const fetchAppointmentsAndPatients = async () => {
+      try {
+        // Step 1: Fetch all appointments
+        const appointmentsResponse = await axios.get(
+          `https://jfsdsdpbackend.up.railway.app/docappointments?docid=${patientData.id}`
+        );
+        const appointments = appointmentsResponse.data;
+
+        // Extract unique patient IDs from the appointments
+        const uniquePatientIds = [...new Set(appointments.map((appointment) => appointment.patientid))];
+
+        // Step 2: Fetch details for each patient ID
+        const patientDetailsPromises = uniquePatientIds.map((id) =>
+          axios.get(`https://jfsdsdpbackend.up.railway.app/viewdocpatients?id=${id}`)
+        );
+        const patientDetailsResponses = await Promise.all(patientDetailsPromises);
+
+        // Step 3: Combine all patient details
+        const patientsData = patientDetailsResponses.map((response) => response.data);
+
+        setPatients(patientsData.flat()); // Flatten the array if needed
+      } catch (error) {
+        console.error('Error fetching patients:', error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchAppointmentsAndPatients();
+  }, [patientData]); // Depend on patientData to ensure it's set
 
   return (
-    <div className="view-patients">
-      <h2>View Patient Details</h2>
-      <form onSubmit={handleSubmit} className="patient-id-form">
-        <input
-          type="number"
-          placeholder="Enter Patient ID"
-          value={patientId}
-          onChange={handleInputChange}
-          required
-        />
-        <button type="submit">View</button>
-      </form>
-
-      {patientDetails ? (
-        <div className="patient-card">
-          <h3>{patientDetails.name}</h3>
-          <p>Age: {patientDetails.age}</p>
-          <p>Condition: {patientDetails.condition}</p>
-          <p>Email: {patientDetails.email}</p>
+    <div className="upcoming-appointments">
+      <div className="view-appointments">
+        <h1>Patients List</h1>
+        <div className="appointments-header">
+          <span>Total Patients: {patients.length}</span>
         </div>
-      ) : (
-        patientId && <p>No patient found with ID: {patientId}</p>
-      )}
+        {loading ? (
+          <p>Loading patients...</p>
+        ) : (
+          <div className="table-container">
+            <table className="appointment-table">
+              <thead>
+                <tr>
+                  <th>Patient ID</th>
+                  <th>Patient Name</th>
+                  <th>Date Of Birth</th>
+                  <th>Gender</th>
+                  <th>Location</th>
+                  <th>Email</th>
+                  <th>Contact</th>
+                  <th>Blood Group</th>
+                </tr>
+              </thead>
+              <tbody>
+                {patients.length > 0 ? (
+                  patients.map((patient) => (
+                    <tr key={patient.id}>
+                      <td>{patient.id}</td>
+                      <td>{patient.name}</td>
+                      <td>{patient.dateofbirth}</td>
+                      <td>{patient.gender}</td>
+                      <td>{patient.location}</td>
+                      <td>{patient.email}</td>
+                      <td>{patient.contact}</td>
+                      <td>{patient.bloodgroup}</td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan="8" align="center">
+                      No patients found
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

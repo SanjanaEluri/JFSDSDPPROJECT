@@ -1,15 +1,15 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './doctorcss/upcomingappointments.css';
 
-export default function ViewAppointments() {
+export default function MyAppointments() {
   const [appointments, setAppointments] = useState([]);
   const [filteredAppointments, setFilteredAppointments] = useState([]);
-  const [, setError] = useState(null);
+  const [error, setError] = useState(null);
   const [patientData, setPatientData] = useState(null);
   const [selectedAppointment, setSelectedAppointment] = useState(null);
   const [prescriptionText, setPrescriptionText] = useState("");
-
+  
   const [statusFilter, setStatusFilter] = useState('All');
   const [monthFilter, setMonthFilter] = useState('All');
 
@@ -20,21 +20,22 @@ export default function ViewAppointments() {
     }
   }, []);
 
-  const fetchData = useCallback(async () => {
+  const fetchData = async () => {
     if (patientData && patientData.id) {
       try {
         const response = await axios.get(`https://jfsdsdpbackend.up.railway.app/docappointments?docid=${patientData.id}`);
+        console.log(response.data);
         setAppointments(response.data);
         setFilteredAppointments(response.data); // Set both initial data and filtered data
       } catch (e) {
         setError(e.message);
       }
     }
-  }, [patientData]);
+  };
 
   useEffect(() => {
     fetchData(); // Fetch data initially
-  }, [fetchData]);
+  }, [patientData]);
 
   const handlePrescriptionClick = (appointment) => {
     setSelectedAppointment(appointment);
@@ -44,9 +45,7 @@ export default function ViewAppointments() {
   const handleAddPrescription = async () => {
     if (selectedAppointment) {
       try {
-        await axios.post(
-          `https://jfsdsdpbackend.up.railway.app/addprescription?id=${selectedAppointment.id}&prescription=${prescriptionText}`
-        );
+        await axios.post(`https://jfsdsdpbackend.up.railway.app/addprescription?id=${selectedAppointment.id}&prescription=${prescriptionText}`);
         fetchData(); // Refresh appointments after adding prescription
         alert("Prescription added successfully!");
         setSelectedAppointment(null); // Close the prescription card
@@ -62,18 +61,19 @@ export default function ViewAppointments() {
     setPrescriptionText("");
   };
 
-  const filterAppointments = useCallback(() => {
+  // Filter appointments based on status and month
+  const filterAppointments = () => {
     let filtered = [...appointments];
 
     // Filter by status
     if (statusFilter !== 'All') {
-      filtered = filtered.filter((appointment) => appointment.status === statusFilter);
+      filtered = filtered.filter(appointment => appointment.status === statusFilter);
     }
 
     // Filter by month
     if (monthFilter !== 'All') {
       const selectedMonth = new Date(monthFilter).getMonth(); // Get month number (0 - 11)
-      filtered = filtered.filter((appointment) => {
+      filtered = filtered.filter(appointment => {
         const appointmentMonth = new Date(appointment.date).getMonth();
         return appointmentMonth === selectedMonth;
       });
@@ -81,16 +81,14 @@ export default function ViewAppointments() {
 
     // Set filtered appointments
     setFilteredAppointments(filtered);
-  }, [appointments, statusFilter, monthFilter]);
+  };
 
   useEffect(() => {
     filterAppointments(); // Apply filter whenever the filter values change
-  }, [filterAppointments]);
+  }, [statusFilter, monthFilter, appointments]);
 
   // Sort appointments by date (most recent first)
-  const sortedAppointments = filteredAppointments.sort(
-    (a, b) => new Date(b.date) - new Date(a.date)
-  );
+  const sortedAppointments = filteredAppointments.sort((a, b) => new Date(b.date) - new Date(a.date));
 
   return (
     <div className="upcoming-appointments">
@@ -109,14 +107,23 @@ export default function ViewAppointments() {
           <option value="All">All Months</option>
           <option value="2024-01-01">January</option>
           <option value="2024-02-01">February</option>
-          {/* Add remaining months */}
+          <option value="2024-03-01">March</option>
+          <option value="2024-04-01">April</option>
+          <option value="2024-05-01">May</option>
+          <option value="2024-06-01">June</option>
+          <option value="2024-07-01">July</option>
+          <option value="2024-08-01">August</option>
+          <option value="2024-09-01">September</option>
+          <option value="2024-10-01">October</option>
+          <option value="2024-11-01">November</option>
+          <option value="2024-12-01">December</option>
         </select>
       </div>
 
       <div className="appointments-header">
         <span>Total Appointments: {filteredAppointments.length}</span>
       </div>
-
+      
       <div className="table-container">
         <table className="appointment-table">
           <thead>
@@ -152,7 +159,7 @@ export default function ViewAppointments() {
                         className="btn-prescription"
                         onClick={() => handlePrescriptionClick(appointment)}
                       >
-                        Add/View Prescription
+                        Add/ViewPrescription
                       </button>
                     )}
                   </td>

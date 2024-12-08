@@ -1,20 +1,28 @@
 import React from 'react'
 import { Link, Route, Routes } from 'react-router-dom'
-import '../style.css'
+//import '../style.css'
+import './patientcss/patient.css'
 import PatientHome from './PatientHome'
 import PatientProfile from './PatientProfile'
 import BookAppointment from './BookAppointment'
 import MyAppointments from './MyAppointments'
-import Home from '../Main/Home'
+
 import { useNavigate } from 'react-router-dom'
+
+import PageNotFound from '../Main/PageNotFound'
+import Dietplan from './Dietplan'
+
 
 export default function PatientNavBar() {
   const navigate=useNavigate()
+
+  
+  
   const handleLogout = () => {
     localStorage.removeItem('isPatientLoggedIn');
-    localStorage.removeItem('Patient');
+    localStorage.removeItem('patient');
 
-    navigate('/home');
+    navigate('/login');
     window.location.reload()
   };
   return (
@@ -38,15 +46,20 @@ export default function PatientNavBar() {
       <Link to='/patienthome'>Home</Link>
       <Link to='/BookAppointment'>Book Appointment</Link>
       <Link to='/MyAppointments'>My Appointments</Link>
+      <Link to='/dietplan'>Diet Plan</Link>
        <Link><button className='logoutbutton' onClick={handleLogout}>Logout</button></Link>
       </div>
       <Routes>
-        <Route path='/'Component={PatientHome}/>
-        <Route path='/patienthome' Component={PatientHome}/>
-        <Route path='/profile' Component={PatientProfile}/>
-        <Route path='/BookAppointment' Component={BookAppointment}/>
-        <Route path='/MyAppointments' Component={MyAppointments}/>
-        <Route path='/home' Component={Home}/>
+        <Route path='/'Component={PatientHome}  exact/>
+        <Route path='/patienthome' Component={PatientHome} exact/>
+        <Route path='/profile' Component={PatientProfile} exact/>
+        <Route path='/BookAppointment' Component={BookAppointment} exact/>
+        <Route path='/MyAppointments' Component={MyAppointments} exact/>
+        <Route path='/dietplan' Component={Dietplan} exact/>
+        <Route path="*" element={<PageNotFound/>} exact />
+
+        {/* <Route path='/home' Component={Home} exact/>
+        <Route path='/login' Component={Login}/> */}
         
       </Routes>
     </div>

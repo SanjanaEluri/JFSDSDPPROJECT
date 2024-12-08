@@ -1,0 +1,83 @@
+/* myappointments.css */
+
+.my-appointments {
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.appointments-header {
+  margin-bottom: 15px;
+  font-size: 18px;
+  color: #555;
+  text-align: center;
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+.appointment-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+.appointment-table th, .appointment-table td {
+  padding: 10px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.appointment-table th {
+  background-color: #f2f2f2;
+  color: #333;
+  font-weight: bold;
+}
+
+.appointment-table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.appointment-table tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+.status-accepted {
+  color: green;
+  font-weight: bold;
+}
+
+.status-rejected {
+  color: red;
+  font-weight: bold;
+}
+
+.status-pending {
+  color: #e6b800;
+  font-weight: bold;
+}
+
+.error-message {
+  color: red;
+  text-align: center;
+  font-size: 16px;
+  margin-top: 20px;
+}
+
+.no-appointments {
+  text-align: center;
+  color: #888;
+  padding: 20px;
+}
