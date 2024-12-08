@@ -1,11 +1,12 @@
 import React from 'react';
 import { Routes, Route, Link, useNavigate } from 'react-router-dom';
 import AdminHome from './AdminHome';
-import AdminLogin from './AdminLogin';
+
 import ViewDoctors from './ViewDoctors';
 import ViewPatients from './ViewPatients';
 import UpdateDoctorStatus from './UpdateDoctorStatus';
 import '../style.css'; // Assuming styles are in a shared style file or adjust as per your project structure.
+import AdminLogin from './AdminLogin';
 
 export default function AdminNavBar() {
   const navigate = useNavigate();
@@ -50,7 +51,7 @@ export default function AdminNavBar() {
         <Route path="/viewpatients" element={<ViewPatients />} />
         <Route path="/updatedoctorstatus" element={<UpdateDoctorStatus />} />
         {/* Default redirect to AdminLogin */}
-        <Route path="/" element={<AdminLogin />} />
+        <Route path="/" element={<AdminLogin/>} />
       </Routes>
     </div>
   );
