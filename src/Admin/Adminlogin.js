@@ -6,13 +6,12 @@ import { useNavigate } from 'react-router-dom';
 
 export default function AdminLogin({ onAdminLogin }) {
   const [data, setData] = useState({
-    username: "",
-    password: ""
+    username: '',
+    password: '',
   });
+  const [message, setMessage] = useState('');
+  const [error, setError] = useState('');
   const navigate = useNavigate();
-  const [message, setMessage] = useState("");
-  const [error, setError] = useState("");
-
   const location = useLocation();
   const activeLogin = location.pathname;
 
@@ -23,9 +22,8 @@ export default function AdminLogin({ onAdminLogin }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-     
       const response = await axios.post('https://jfsdsdpbackend.up.railway.app/adminlogin', data);
-     
+
       if (response.data) {
         onAdminLogin();
 
@@ -33,14 +31,14 @@ export default function AdminLogin({ onAdminLogin }) {
         localStorage.setItem('admin', JSON.stringify(response.data));
 
         // Navigate to admin home page
-        navigate("/adminhome");
+        navigate('/adminhome');
       } else {
-        setMessage("Incorrect Username or Password");
-        setError("");
+        setMessage('Incorrect Username or Password');
+        setError('');
       }
     } catch (err) {
-      setMessage("");
-      setError(err.message || "An error occurred. Please try again.");
+      setMessage('');
+      setError(err.message || 'An error occurred. Please try again.');
     }
   };
 
@@ -49,8 +47,8 @@ export default function AdminLogin({ onAdminLogin }) {
       <section className="login-section">
         <div className="login-content">
           {/* Display error or message */}
-          {message && <h4 align="center" style={{ color: "red" }}>{message}</h4>}
-          {error && <h4 align="center" style={{ color: "red" }}>{error}</h4>}
+          {message && <h4 align="center" style={{ color: 'red' }}>{message}</h4>}
+          {error && <h4 align="center" style={{ color: 'red' }}>{error}</h4>}
 
           <div className="toggle-buttons">
             {/* Navigation links with active state */}
