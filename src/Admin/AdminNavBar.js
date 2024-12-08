@@ -51,7 +51,7 @@ export default function AdminNavBar() {
         <Route path="/viewpatients" element={<ViewPatients />} />
         <Route path="/updatedoctorstatus" element={<UpdateDoctorStatus />} />
         {/* Default redirect to AdminLogin */}
-        <Route path="/" element={<AdminLogin/>} />
+        <Route path="/" element={<AdminHome/>} />
       </Routes>
     </div>
   );
